@@ -1,0 +1,47 @@
+{
+  "name": "knockout.validation",
+  "version": "2.0.3",
+  "description": "A KnockoutJS Plugin for model and property validation",
+  "main": "dist/knockout.validation.js",
+  "files": [
+    "dist",
+    "localization",
+    "CONTRIBUTING.md"
+  ],
+  "peerDependencies": {
+    "knockout": ">=2.3.0"
+  },
+  "devDependencies": {
+    "grunt": "~0.4.5",
+    "grunt-cli": "~0.1.13",
+    "grunt-contrib-jshint": "~0.11.0",
+    "grunt-contrib-uglify": "~0.8.0",
+    "grunt-contrib-concat": "~0.5.1",
+    "grunt-contrib-qunit": "~0.5.2",
+    "grunt-contrib-watch": "~0.6.1",
+    "grunt-clear": "~0.2.1",
+    "jshint-stylish": "~1.0.1"
+  },
+  "scripts": {
+    "test": "grunt test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Knockout-Contrib/Knockout-Validation.git"
+  },
+  "author": {
+    "name": "@ericmbarnard"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Knockout-Contrib/Knockout-Validation/issues"
+  },
+  "readme": "#Knockout Validation\nA KnockoutJS Plugin for model and property validation\n\n[![Build Status](https://travis-ci.org/Knockout-Contrib/Knockout-Validation.svg)](https://travis-ci.org/Knockout-Contrib/Knockout-Validation)\n[![Bower version](https://badge.fury.io/bo/knockout-validation.svg)](http://badge.fury.io/bo/knockout-validation)\n[![npm version](https://badge.fury.io/js/knockout.validation.svg)](http://badge.fury.io/js/knockout.validation)\n[![NuGet version](https://badge.fury.io/nu/Knockout.Validation.svg)](http://badge.fury.io/nu/Knockout.Validation)\n\nContributors:\n\n* [Eric Barnard](https://github.com/ericmbarnard)\n* [Steve Greatrex](https://github.com/stevegreatrex)\n* [Andy Booth](https://github.com/andybooth)\n* [Michal Poreba](https://github.com/michalporeba)\n* and many others!\n\nLicense: [MIT](http://www.opensource.org/licenses/mit-license.php)\n\n\n## Install\n\n#### Bower\n\n```sh\nbower install knockout-validation --save-dev\n```\n\n#### NuGet\n\n```ps1\nPM> Install-Package Knockout.Validation\n```\n\n#### NPM\n\n```sh\nnpm install knockout.validation --save\n```\n\n#### CDN\n\n##### [cdnjs](https://cdnjs.com/libraries/knockout-validation)\n* https://cdnjs.cloudflare.com/ajax/libs/knockout-validation/2.0.3/knockout.validation.js\n* https://cdnjs.cloudflare.com/ajax/libs/knockout-validation/2.0.3/knockout.validation.min.js\n\n##### [jsdelivr](http://www.jsdelivr.com/#!knockout.validation)\n- https://cdn.jsdelivr.net/knockout.validation/2.0.3/knockout.validation.js\n- https://cdn.jsdelivr.net/knockout.validation/2.0.3/knockout.validation.min.js\n\n\n##Getting Started\n```javascript\n//start using it!\nvar myValue = ko.observable().extend({ required: true });\n\n//oooh complexity\nvar myComplexValue = ko.observable().extend({\n                     required: true,\n                     minLength: 3,\n                     pattern: {\n                          message: 'Hey this doesnt match my pattern',\n                          params: '^[A-Z0-9].$'\n                     }\n                 });\n\n//or chaining if you like that\nvar myComplexValue = ko.observable()\n\nmyComplexValue.extend({ required: true })\n            .extend({ minLength: 3 })\n            .extend({ pattern: {\n                 message: 'Hey this doesnt match my pattern',\n                 params: '^[A-Z0-9].$'\n            }});\n\n//want to know if all of your ViewModel's properties are valid?\nvar myViewModel = ko.validatedObservable({\n   property1: ko.observable().extend({ required: true }),\n   property2: ko.observable().extend({ max: 10 })\n});\n\nconsole.log(myViewModel.isValid()); //false\n\nmyViewModel().property1('something');\nmyViewModel().property2(9);\n\nconsole.log(myViewModel.isValid()); //true\n\n```\nsee more examples on the Fiddle: http://jsfiddle.net/KHFn8/5424/\n\n##Native Validation Rules\n**Required**:\n\n```javascript\nvar myObj = ko.observable('').extend({ required: true });\n```\n**Min**:\n\n```javascript\nvar myObj = ko.observable('').extend({ min: 2 });\n```\n**Max**:\n\n```javascript\nvar myObj = ko.observable('').extend({ max: 99 });\n```\n**MinLength**:\n\n```javascript\nvar myObj = ko.observable('').extend({ minLength: 3 });\n```\n**MaxLength**:\n\n```javascript\nvar myObj = ko.observable('').extend({ maxLength: 12 });\n```\n**Email**:\n\n```javascript\nvar myObj = ko.observable('').extend({ email: true });\n```\n\n... and [MANY MORE](https://github.com/Knockout-Contrib/Knockout-Validation/wiki/Native-Rules)\n\n_Much thanks to the [jQuery Validation Plug-In](https://github.com/jzaefferer/jquery-validation) team for their work on many of the rules_\n##Custom Validation Rules\n####Custom Rules\nCustom Rules can be created using the simple example below. All you need is to define a validator function and a default message.\nThe validator function takes in the observable's value, and the `params` that you pass in with the `extend` method.\n\n```javascript\nko.validation.rules['mustEqual'] = {\n    validator: function (val, otherVal) {\n        return val === otherVal;\n    },\n    message: 'The field must equal {0}'\n};\nko.validation.registerExtenders();\n\n//the value '5' is the second arg ('otherVal') that is passed to the validator\nvar myCustomObj = ko.observable().extend({ mustEqual: 5 });\n```\nLearn more about Custom Rules on the [WIKI](https://github.com/Knockout-Contrib/Knockout-Validation/wiki/Custom-Validation-Rules)\n\n###Or Check out our [User-Contributed Custom Rules](https://github.com/Knockout-Contrib/Knockout-Validation/wiki/User-Contributed-Rules)!###\n\n##HTML5 Validation Attributes\n\n**Required**:\n\n```html\n<input type=\"text\" data-bind=\"value: myProp\" required />\n```\n\n**Min**:\n\n```html\n<input type=\"number\" data-bind=\"value: myProp\" min=\"2\" />\n<input type=\"week\" data-bind=\"value:myWeek\" min=\"2012-W03\" />\n<input type=\"month\" data-bind=\"value:myMonth\" min=\"2012-08\" />\n```\n\n**Max**:\n\n```html\n<input type=\"number\" data-bind=\"value: myProp\" max=\"99\" />\n<input type=\"week\" data-bind=\"value:myWeek\" max=\"2010-W15\" />\n<input type=\"month\" data-bind=\"value:myMonth\" min=\"2012-08\" />\n```\n\n**Pattern**:\n\n```html\n<input type=\"text\" data-bind=\"value: myProp\" pattern=\"^[a-z0-9].*\" />\n```\n\n**Step**:\n\n```html\n<input type=\"text\" data-bind=\"value: myProp\" step=\"3\" />\n```\n**Special Note, the 'MinLength' attribute was removed until the HTML5 spec fully supports it**\n\n##Knockout Bindings\n\n###ValidationMessage\nIf you want to customize the display of your objects validation message, use the `validationMessage` binding:\n\n```html\n<div>\n   <input type=\"text\" data-bind=\"value: someValue\"/>\n   <p data-bind=\"validationMessage: someValue\"></p>\n<div>\n```\nCheck out more on [Validation Bindings](https://github.com/Knockout-Contrib/Knockout-Validation/wiki/Validation-Bindings)\n\n##Remote Validation Rules\nCheck out our [Async Validation](https://github.com/Knockout-Contrib/Knockout-Validation/wiki/Async-Rules) and [jQuery AJAX Validation](https://github.com/ericmbarnard/Knockout-Validation/wiki/Async-Rules)\n\n##Localization\n\nAdd a reference to the localization js files after the Knockout Validation plugin\n\n```html\n<script type=\"text/javascript\" src=\"knockout.validation.js\"></script>\n<script type=\"text/javascript\" src=\"el-GR.js\"></script>\n<script type=\"text/javascript\" src=\"fr-FR.js\"></script>\n<script type=\"text/javascript\" src=\"de-DE.js\"></script>\n```\n\nApply localized messages\n\n```js\nko.validation.locale('el-GR');\n```\n",
+  "readmeFilename": "README.md",
+  "_id": "knockout.validation@2.0.3",
+  "dist": {
+    "shasum": "09bfb90d05070dcc545da997a4bed4c9efcdac73"
+  },
+  "_from": "knockout.validation@",
+  "_resolved": "https://registry.npmjs.org/knockout.validation/-/knockout.validation-2.0.3.tgz"
+}

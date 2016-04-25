@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>PDMP Dashboard | Patient Query</title>
+    <link rel="stylesheet" href="css/main.css" />
+</head>
+
+<body class="hold-transition skin-black-light ">
+<div class="wrapper">
+    <!-- Main Header -->
+
+    <!-- Header Navbar -->
+    <nav class="navbar navbar-defaultp">
+        <ul class="nav navbar-nav">
+            <li><a href="/rustybuckets">RustBuckets</a></li>
+            <li><a href="/rustbucketsko">PolishedBuckets</a></li>
+            <li><a href="/makebucket">NewBucket</a></li>
+            <li><a href="/userbucket">UserBuckets</a></li>
+        </ul>
+    </nav>
+
+    <!-- PATIENT SEARCH QUERY WRAPPER -->
+    <div id="make-rust-buckets" class="content-wrap">
+        <!-- Content Header -->
+        <section class="content-header">
+            <h1>
+                Make A New RustBucket
+            </h1>
+        </section>
+        <!-- Main content -->
+        <section class="content">
+            <pre data-bind="text: ko.toJSON($data, null, 2)"></pre>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="box box-solid box-default">
+                        <div class="box-body">
+
+                            <ul data-bind="template: { name: getTemplate, foreach: users }"></ul>
+                            <script id="SUPERTmpl" type="text/html">
+                                <li>
+                                    <div class="box box-solid box-default">
+                                        <div class="box-body">
+                                            SUPER: <span data-bind="text: name"></span>
+                                            <ul data-bind="foreach: $parent.users">
+                                                <li>
+                                                    <span data-bind="text: name"></span>
+                                                    <input data-bind="value: role"/>
+
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </li>
+                            </script>
+                            <script id="LAWTmpl" type="text/html">
+                                <li>
+                                    <div class="box box-solid box-default">
+                                        <div class="box-body">
+                                            LAW: <span data-bind="text: name"></span>
+                                                <span data-bind="text: name"></span>
+                                                <input data-bind="value: role"/>
+                                        </div>
+                                    </div>
+                                </li>
+                            </script>
+                            <script id="EXTERNALTmpl" type="text/html">
+                                <li>
+                                    <div class="box box-solid box-default">
+                                        <div class="box-body">
+                                            EXTERNAL: <span data-bind="text: name"></span>
+                                                <span>"This role does nothing..."</span>
+                                        </div>
+                                    </div>
+                                </li>
+                            </script>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+    </div><!-- /.PATIENT SEARCH QUERY WRAPPER -->
+
+
+
+</div><!-- ./wrapper -->
+
+<!-- JS SCRIPTS -->
+<script src="ui/jquery/jquery.min.js"></script>
+<!-- Bootstrap 3.3.4 -->
+<script src="ui/bootstrap/bootstrap.min.js"></script>
+<!-- Assets Core -->
+<script src="ui/globalassets/scripts/assets.core.js"></script>
+<!-- App Framework-->
+<script src="ui/app/js/app.min.js"></script>
+<script src="ui/jqueryui/ui/jquery.ui.core.js"></script>
+<script src="ui/jqueryui/ui/jquery.ui.datepicker.js"></script>
+<!-- DataTables -->
+<script src="ui/datatables/jquery.dataTables.min.js"></script>
+<script src="ui/datatables/dataTables.bootstrap.min.js"></script>
+<!-- Patient Search -->
+<script type="text/javascript" src="js/knockout-3.4.0.js"></script>
+<script type="text/javascript" src="js/knockout.validation.min.js"></script>
+<script src="js/searchbucket_ko.js"></script>
+
+</body>
+</html>

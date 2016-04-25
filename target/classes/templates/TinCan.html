@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>PDMP Dashboard | Patient Query</title>
+    <link rel="stylesheet" href="css/main.css" />
+</head>
+
+<body class="hold-transition skin-black-light ">
+<div class="wrapper">
+    <!-- Main Header -->
+
+    <!-- Header Navbar -->
+    <nav class="navbar navbar-defaultp">
+        <ul class="nav navbar-nav">
+            <li><a href="#">Rust Bucket</a></li>
+            <li><a href="#">Voltron</a></li>
+        </ul>
+    </nav>
+
+    <!-- PATIENT RESULTS WRAPPER -->
+    <div id="JQuery-example" class="content-wrap">
+        <!-- Content Header -->
+        <section class="content-header">
+            <h1>
+                Patient Results
+            </h1>
+        </section>
+        <!-- Main content -->
+        <section class="content">
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="box box-solid box-default">
+                        <div class="box-body">
+                            <!-- PATIENT RESULTS TABLE -->
+                            <table id="patient-results-table" class="table table-bordered table-striped" >
+                                <thead>
+                                <tr>
+                                    <th class="isHidden"></th>
+                                    <th>Last Name</th>
+                                    <th>First Name</th>
+                                    <th>DOB</th>
+                                    <th class="pr-county">County</th>
+                                    <th class="pr-address">Address</th>
+                                    <th class="pr-city">City</th>
+                                    <th class="pr-state">State</th>
+                                    <th class="pr-zipcode">Zip</th>
+                                </tr>
+                                </thead>
+                                <tbody id="testbody" data-bind="foreach: {data: patients}">
+                                <tr data-bind="click: isSelected">
+                                    <td class="isHidden"><input type="checkbox" data-bind="checked: isCheck"/></td>
+                                    <td data-bind="text: lastName"></td>
+                                    <td data-bind="text: firstName"></td>
+                                    <td data-bind="text: dateOfBirthDisplay"></td>
+                                    <td data-bind="text: county" class="pr-county"></td>
+                                    <td data-bind="text: addressOne" class="pr-address"></td>
+                                    <td data-bind="text: city" class="pr-city"></td>
+                                    <td data-bind="text: state" class="pr-state"></td>
+                                    <td data-bind="text: zip" class="pr-zipcode"></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                            <br/>
+                            <!-- PATIENT RESULTS COUNT CALL -->
+                            <p>Showing all of <span id="total-results-count"></span> result(s).</p>
+                            <div class="col-md-6 form-group" style="text-align:right;">
+                                <button data-bind="click: Submit" class="btn bg-blue btn-lg">Submit</button>
+                                <button data-bind="click: SavePdf, css: { disabled: checkIdLength() === false }" class="btn bg-blue btn-lg disabled" >Save and Return</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div><!-- /.PATIENT RESULTS WRAPPER -->
+
+
+
+
+
+
+
+</div><!-- ./wrapper -->
+
+<!-- JS SCRIPTS -->
+<script src="ui/jquery/jquery.min.js"></script>
+<!-- Bootstrap 3.3.4 -->
+<script src="ui/bootstrap/bootstrap.min.js"></script>
+<!-- Assets Core -->
+<script src="ui/globalassets/scripts/assets.core.js"></script>
+<!-- App Framework-->
+<script src="ui/app/js/app.min.js"></script>
+<script src="ui/jqueryui/ui/jquery.ui.core.js"></script>
+<script src="ui/jqueryui/ui/jquery.ui.datepicker.js"></script>
+<!-- DataTables -->
+<script src="ui/datatables/jquery.dataTables.min.js"></script>
+<script src="ui/datatables/dataTables.bootstrap.min.js"></script>
+<!-- Patient Search -->
+<script type="text/javascript" src="js/knockout-3.4.0.js"></script>
+<script type="text/javascript" src="js/knockout.validation.min.js"></script>
+<script src="js/RustBucket.js"></script>
+
+</body>
+</html>

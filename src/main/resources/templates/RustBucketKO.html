@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>PDMP Dashboard | Patient Query</title>
+    <link rel="stylesheet" href="css/main.css" />
+</head>
+
+<body class="hold-transition skin-black-light ">
+<div class="wrapper">
+    <!-- Main Header -->
+
+    <!-- Header Navbar -->
+    <nav class="navbar navbar-defaultp">
+        <ul class="nav navbar-nav">
+            <li><a href="/rustybuckets">RustBuckets</a></li>
+            <li><a href="/rustbucketsko">PolishedBuckets</a></li>
+            <li><a href="/makebucket">NewBucket</a></li>
+            <li><a href="/userbucket">UserBuckets</a></li>
+        </ul>
+    </nav>
+
+    <!-- RUST BUCKET WRAPPER -->
+    <div id="JQuery-example" class="content-wrap">
+        <!-- Content Header -->
+        <section class="content-header">
+            <h1>
+                Rust Buckets
+            </h1>
+        </section>
+        <!-- Main content -->
+        <section class="content">
+            <pre data-bind="text: ko.toJSON($data, null, 2)"></pre>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="box box-solid box-default">
+                        <div class="box-body">
+                            <!-- Rust Bucket -->
+                            <table class="table table-bordered table-striped" >
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Model Number</th>
+                                        <th>Component</th>
+                                        <th>Maker</th>
+                                        <th>
+                                        <select data-bind="options: uniqueMakers, value: selectedMaker, event:{ change: selectChange}">
+                                            <option value="All">All</option>
+                                        </select></th>
+                                    </tr>
+                                </thead>
+                                <tbody id="rust-bucket-tbody" data-bind="foreach: {data: rustBuckets}">
+                                    <tr>
+                                        <td data-bind="text: name"></td>
+                                        <td data-bind="text: modelnumber"></td>
+                                        <td data-bind="text: component"></td>
+                                        <td data-bind="text: maker"></td>
+                                        <td><button class='btn bg-blue' data-bind="click: $parent.removeRB">remove</button></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <br/>
+                            <p>Showing all of <span data-bind="text: countRB"></span> result(s).</p>
+
+                            <div class="col-md-6 form-group" style="text-align:right;">
+                                <button data-bind="click: Submit" class="btn bg-blue btn-lg">Submit</button>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div><!-- /.RUST BUCKET WRAPPER -->
+
+
+
+
+
+
+
+</div><!-- ./wrapper -->
+
+<!-- JS SCRIPTS -->
+<script src="ui/jquery/jquery.min.js"></script>
+<!-- Bootstrap 3.3.4 -->
+<script src="ui/bootstrap/bootstrap.min.js"></script>
+<!-- Assets Core -->
+<script src="ui/globalassets/scripts/assets.core.js"></script>
+<!-- App Framework-->
+<script src="ui/app/js/app.min.js"></script>
+<script src="ui/jqueryui/ui/jquery.ui.core.js"></script>
+<script src="ui/jqueryui/ui/jquery.ui.datepicker.js"></script>
+<!-- DataTables -->
+<script src="ui/datatables/jquery.dataTables.min.js"></script>
+<script src="ui/datatables/dataTables.bootstrap.min.js"></script>
+<!-- Patient Search -->
+<script type="text/javascript" src="js/knockout-3.4.0.js"></script>
+<script type="text/javascript" src="js/knockout.validation.min.js"></script>
+<script src="js/rustbucket_ko.js"></script>
+
+</body>
+</html>
